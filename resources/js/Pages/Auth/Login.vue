@@ -38,6 +38,8 @@ const submit = () => {
         </div>
 
         <form @submit.prevent="submit">
+            <p class="text-xs text-center">Email : admin@test.com</p>
+            <p class="text-xs text-center">Password : admin</p>
             <div>
                 <InputLabel for="email" value="Email" />
 

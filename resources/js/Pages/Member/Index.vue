@@ -31,9 +31,12 @@ axios.get('/api/member').then(response => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <div class="relative overflow-x-auto">
-                        <Link
-                            :href="route('member.create')"
-                        ><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Member</button></Link>
+                        <div class="flex justify-between items-center py-5">
+                            <h2 class="px-5 text-lg font-bold text-gray-900">Library Member</h2>
+                            <Link
+                                :href="route('member.create')"
+                            ><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Member</button></Link>
+                        </div>
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                     <tr>

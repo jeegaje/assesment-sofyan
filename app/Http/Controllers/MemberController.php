@@ -136,7 +136,7 @@ class MemberController extends Controller
 
             if ($e->errorInfo[1] === 1062) {
                 return response()->json([
-                    'message' => 'Gagal memperbarui anggota. Nama/Email/Telepon sudah ada yang menggunakan.',
+                    'message' => 'Gagal memperbarui anggota. Email/Telepon sudah ada yang menggunakan.',
                     'status' => 'error',
                 ], 409);
             }

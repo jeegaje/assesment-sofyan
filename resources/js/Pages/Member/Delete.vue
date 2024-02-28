@@ -50,12 +50,16 @@ const deleteMember = async () => {
                     <h2 class="text-lg font-medium text-gray-900">Delete Member</h2>
                     <p>Are you sure want to delete this member?</p>
                     
-                    <button class="py-2 px-5 me-2 bg-red-500 rounded text-white font-bold" @click="deleteMember">
-                        Delete Member
-                    </button>
-                    <Link class="py-2 px-5 me-2 bg-gray-500 rounded text-white font-bold" :href="route('member.index')">
-                        Cancel
-                    </Link>
+                    <div class="mt-5">
+                        <button class="py-2 px-5 me-2 bg-red-500 rounded text-white font-bold" @click="deleteMember">
+                            Delete Member
+                        </button>
+                        <Link :href="route('member.index')">
+                            <button class="py-2 px-5 me-2 bg-gray-500 rounded text-white font-bold">
+                                Cancel
+                            </button>
+                        </Link>
+                    </div>
                 </div>
                 <div class="flex items-center justify-center">
                     <Link v-show="!showDelete"  :href="route('member.index')">

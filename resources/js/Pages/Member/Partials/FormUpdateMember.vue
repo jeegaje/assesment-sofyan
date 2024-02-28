@@ -43,7 +43,7 @@ const updateMember = async () => {
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Add Library Member</h2>
+            <h2 class="text-lg font-medium text-gray-900">Update Library Member</h2>
         </header>
 
         <form @submit.prevent="updateMember" class="mt-6 space-y-6">

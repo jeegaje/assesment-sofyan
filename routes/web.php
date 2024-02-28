@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::prefix('anggota')->group(function () {
+    Route::get('/', [MemberController::class, 'index'])->name('member.index');
+    Route::get('/create', [MemberController::class, 'create'])->name('member.create');
+    // Route::post('/store', [MemberController::class, 'store'])->name('anggota.store');
+    // Route::get('/{id}/edit', [MemberController::class, 'edit'])->name('anggota.edit');
+    // Route::put('/{id}', [MemberController::class, 'update'])->name('anggota.update');
+    // Route::delete('/{id}', [MemberController::class, 'destroy'])->name('anggota.destroy');
 });
 
 require __DIR__.'/auth.php';

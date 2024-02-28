@@ -39,10 +39,8 @@ Route::middleware('auth')->group(function () {
 Route::prefix('anggota')->group(function () {
     Route::get('/', [MemberController::class, 'index'])->name('member.index');
     Route::get('/create', [MemberController::class, 'create'])->name('member.create');
-    // Route::post('/store', [MemberController::class, 'store'])->name('anggota.store');
-    // Route::get('/{id}/edit', [MemberController::class, 'edit'])->name('anggota.edit');
-    // Route::put('/{id}', [MemberController::class, 'update'])->name('anggota.update');
-    // Route::delete('/{id}', [MemberController::class, 'destroy'])->name('anggota.destroy');
+    Route::get('/show/{id}', [MemberController::class, 'show'])->name('anggota.show');
+    Route::get('/delete/{id}', [MemberController::class, 'delete'])->name('anggota.delete');
 });
 
 require __DIR__.'/auth.php';

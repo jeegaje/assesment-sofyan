@@ -69,9 +69,8 @@ axios.get('/api/member').then(response => {
                                             {{ member.address }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            <a href="">View</a>
-                                            <br>
-                                            <a href="">Delete</a>
+                                            <Link class="bg-blue-500 text-white py-2 px-3 me-2 rounded" :href="route('anggota.show', {'id': member.id})">View</Link>
+                                            <Link class="bg-red-500 text-white py-2 px-3 rounded" :href="route('anggota.delete', {'id': member.id})">Delete</Link>
                                         </td>
                                     </tr>
                                 </tbody>

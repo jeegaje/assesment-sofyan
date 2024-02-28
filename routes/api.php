@@ -25,3 +25,5 @@ Route::get('/member', function (Request $request) {
 
 Route::get('/member', [MemberController::class, 'allMember'])->name('member.index');
 Route::post('/member', [MemberController::class, 'createMember'])->name('member.create');
+Route::put('/member/{id}', [MemberController::class, 'updateMember'])->name('member.update');
+Route::delete('/member/{id}', [MemberController::class, 'deleteMember'])->name('member.destroy');

@@ -7,19 +7,22 @@ import { ref } from 'vue';
 
 const emit = defineEmits(['showAlert'])
 
-defineProps({
+const props = defineProps({
     mustVerifyEmail: {
         type: Boolean,
     },
     status: {
         type: String,
     },
+    dataMember: {
+        type: Object,
+    }
 });
 
-const name = ref('');
-const email = ref('');
-const phone = ref('');
-const address = ref('');
+const name = ref(props.dataMember ? props.dataMember.name : '');
+const email = ref(props.dataMember ? props.dataMember.email : '');
+const phone = ref(props.dataMember ? props.dataMember.phone : '');
+const address = ref(props.dataMember ? props.dataMember.address : '');
 const formErrors = ref({});
 
 const createMember = async () => {

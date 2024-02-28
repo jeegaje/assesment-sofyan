@@ -1,34 +1,52 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/InputError.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
-defineProps({
+const emit = defineEmits(['showAlert'])
+
+const props = defineProps({
     mustVerifyEmail: {
         type: Boolean,
     },
     status: {
         type: String,
     },
+    dataMember: {
+        type: Object,
+    }
 });
 
-const user = usePage().props.auth.user;
+const memberId = ref(props.dataMember ? props.dataMember.id : '');
+const name = ref(props.dataMember ? props.dataMember.name : '');
+const email = ref(props.dataMember ? props.dataMember.email : '');
+const phone = ref(props.dataMember ? props.dataMember.phone : '');
+const address = ref(props.dataMember ? props.dataMember.address : '');
 
-const form = useForm({
-    name: user.name,
-    email: user.email,
-});
+const updateMember = async () => {
+    try {
+    const { data } = await axios.put('/api/member/' + memberId.value, {
+        name: name.value,
+        phone: phone.value,
+        address: address.value,
+        email: email.value
+    });
+        emit('showAlert', data)
+    } catch (error) {
+        emit('showAlert', error.response.data)
+    }
+}
 </script>
 
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Library Member</h2>
+            <h2 class="text-lg font-medium text-gray-900">Add Library Member</h2>
         </header>
 
-        <form @submit.prevent="form.patch(route('profile.update'))" class="mt-6 space-y-6">
+        <form @submit.prevent="updateMember" class="mt-6 space-y-6">
             <div>
                 <InputLabel for="name" value="Name" />
 
@@ -36,13 +54,10 @@ const form = useForm({
                     id="name"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.name"
+                    v-model="name"
                     required
                     autofocus
-                    autocomplete="name"
                 />
-
-                <InputError class="mt-2" :message="form.errors.name" />
             </div>
 
             <div>
@@ -52,12 +67,9 @@ const form = useForm({
                     id="email"
                     type="email"
                     class="mt-1 block w-full"
-                    v-model="form.email"
+                    v-model="email"
                     required
-                    autocomplete="username"
                 />
-
-                <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div>
@@ -67,11 +79,9 @@ const form = useForm({
                     id="phone"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.email"
+                    v-model="phone"
                     required
                 />
-
-                <InputError class="mt-2" />
             </div>
 
             <div>
@@ -81,24 +91,16 @@ const form = useForm({
                     id="address"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.email"
+                    v-model="address"
                     required
                 />
-
-                <InputError class="mt-2" />
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Add</PrimaryButton>
-
-                <Transition
-                    enter-active-class="transition ease-in-out"
-                    enter-from-class="opacity-0"
-                    leave-active-class="transition ease-in-out"
-                    leave-to-class="opacity-0"
-                >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Saved.</p>
-                </Transition>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update Member</button>
+                <Link
+                    :href="route('member.index')"
+                ><button class="bg-gray-400 text-white font-bold py-2 px-4 rounded">Cancel</button></Link>
             </div>
         </form>
     </section>
